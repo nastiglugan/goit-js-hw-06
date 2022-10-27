@@ -1,14 +1,16 @@
-const input = document.querySelector("#validation-input");
+const inputEl = document.querySelector("#validation-input");
 
-const validNumber = document.querySelector('input[data-length="6"]').dataset
-  .length;
+const validNumber = Number(inputEl.dataset.length);
 
-const validation = () => {
-  if (input.value < validNumber) {
-    input.classList.add("invalid");
-  } else {
-    input.classList.add("valid");
+const validation = (evt) => {
+  if (evt.currentTarget.value.length === validNumber) {
+    inputEl.classList.add("valid");
+    inputEl.classList.remove("invalid");
+    return;
   }
+
+  inputEl.classList.remove("valid");
+  inputEl.classList.add("invalid");
 };
 
-input.addEventListener("blur", validation);
+inputEl.addEventListener("blur", validation);
