@@ -7,6 +7,8 @@ const bntCreate = document.querySelector("#controls button[data-create]");
 const bntDestroy = document.querySelector("#controls button[data-destroy]");
 const boxList = document.querySelector("#boxes");
 
+let size = 30;
+
 let inputValue = 0;
 
 const getInputNumber = (event) => {
@@ -16,14 +18,17 @@ const getInputNumber = (event) => {
 const createBoxes = (amount) => {
   amount = inputValue;
 
-  for (let i = 0; i < amount; i += 1) {
-    const newBox = document.createElement("div");
-    newBox.style.width = `${30 + (i - 1) * 10}px`;
-    newBox.style.height = `${30 + (i - 1) * 10}px`;
-    newBox.style.backgroundColor = getRandomHexColor();
+  const markup = [];
 
-    boxList.append(newBox);
+  for (let i = 0; i < amount; i += 1) {
+    size += 10;
+    const newBox = document.createElement("div");
+    newBox.style.width = size + "px";
+    newBox.style.height = size + "px";
+    newBox.style.backgroundColor = getRandomHexColor();
+    markup.push(newBox);
   }
+  boxList.append(...markup);
 };
 
 const destroyBoxes = (event) => {
